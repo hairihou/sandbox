@@ -9,7 +9,7 @@
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "http-server build/client/",
     "typecheck": "tsc",
-    "format": "npm run lint -- --fix && prettier --write **/*.{ts,tsx,json,md,yml}",
+    "format": "npm run lint -- --fix && prettier --write **/*.{ts,tsx,mjs,json,md,yml}",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "node": ">=18.0.0"
   },
   "lint-staged": {
-    "**/*.{ts,tsx,json,md,yml}": [
+    "**/*.{ts,tsx,mjs,json,md,yml}": [
       "prettier --write"
     ]
   }
