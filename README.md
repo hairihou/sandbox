@@ -1,37 +1,30 @@
-# templates/spa
+# React + TypeScript + Vite
 
-This template leverages [Remix SPA Mode](https://remix.run/docs/en/main/future/spa-mode) to build your app as a Single-Page Application using [Client Data](https://remix.run/docs/en/main/guides/client-data) for all of you data loads and mutations.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-⚠️ This is built on top of the Remix Vite template. Remix support for Vite is currently unstable and not recommended for production.
+Currently, two official plugins are available:
 
-📖 See the [Remix Vite docs][remix-vite-docs] for details on supported features.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Setup
+## Expanding the ESLint configuration
 
-```shellscript
-npx create-remix@latest --template remix-run/remix/templates/spa
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+};
 ```
 
-## Development
-
-You can develop your SPA app just like you would a normal Remix app, via:
-
-```shellscript
-npm run dev
-```
-
-## Production
-
-When you are ready yo build a production version of your app, `npm run build` will generate your assets and an `index.html` for the SPA.
-
-```shellscript
-npm run build
-```
-
-You can serve this from any server of your choosing, for a simple example, you could use [http-server](https://www.npmjs.com/package/http-server):
-
-```shellscript
-npx http-server build/client/
-```
-
-[remix-vite-docs]: https://remix.run/docs/en/main/future/vite
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
